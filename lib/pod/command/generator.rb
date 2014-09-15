@@ -17,17 +17,12 @@ module Pod
     # @todo Create a PR to add your plugin to CocoaPods/cocoapods.org
     #       in the `plugins.json` file, once your plugin is released.
     #
-    class Generator < Command
-      self.summary = "Short description of cocoapods-tap-acknowledgements-generator."
-
-      self.description = <<-DESC
-        Longer description of cocoapods-tap-acknowledgements-generator.
-      DESC
-
-      self.arguments = 'NAME'
+    class Acknowledgements < Command
+      self.summary = "Plugin for generating acknowledgements from markdown files."
 
       def initialize(argv)
         @name = argv.shift_argument
+        puts @name
         super
       end
 
