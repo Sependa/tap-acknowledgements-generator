@@ -1,1 +1,2 @@
-require 'cocoapods_tap_acknowledgements_generator'
+require 'cocoapods_acknowledgements_generator'
+

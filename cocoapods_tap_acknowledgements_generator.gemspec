@@ -1,16 +1,14 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'cocoapods_tap_acknowledgements_generator.rb'
+require 'cocoapods_acknowledgements_generator/version.rb'
 
 Gem::Specification.new do |spec|
-  spec.name          = "cocoapods-tap-acknowledgements-generator"
-  spec.version       = CocoapodsTapAcknowledgementsGenerator::VERSION
+  spec.name          = "cocoapods-acknowledgements-generator"
+  spec.version       = CocoapodsInstallMetadata::VERSION
   spec.authors       = ["Pawel Dudek"]
-  spec.email         = ["p@taptera.com"]
-  spec.description   = %q{A short description of cocoapods-tap-acknowledgements-generator.}
-  spec.summary       = %q{A longer description of cocoapods-tap-acknowledgements-generator.}
-  spec.homepage      = "https://github.com/EXAMPLE/cocoapods-tap-acknowledgements-generator"
+  spec.summary       = %q{CocoaPods plugin that generates a html file which includes the acknowlegements metadata.}
+  spec.homepage      = "git@github.com:Taptera/tap-acknowledgements-generator"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
@@ -20,5 +18,4 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
-  spec.add_dependency "cocoapods"
 end
