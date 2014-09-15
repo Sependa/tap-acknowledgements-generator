@@ -5,7 +5,7 @@ require 'cocoapods_acknowledgements_generator/version.rb'
 
 Gem::Specification.new do |spec|
   spec.name          = "cocoapods-acknowledgements-generator"
-  spec.version       = CocoapodsInstallMetadata::VERSION
+  spec.version       = CocoapodsAcknowledgementsGenerator::VERSION
   spec.authors       = ["Pawel Dudek"]
   spec.summary       = %q{CocoaPods plugin that generates a html file which includes the acknowlegements metadata.}
   spec.homepage      = "git@github.com:Taptera/tap-acknowledgements-generator"
