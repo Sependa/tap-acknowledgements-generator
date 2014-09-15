@@ -1,7 +1,5 @@
 module CocoapodsTapAcknowledgementsGenerator
 
-	require 'cocoapods_install_metadata/plist_generator'
-
 	Pod::Plugins.register(:post_install) do |options|
 		require 'xcodeproj/ext'
 		sandbox = Pod::Sandbox.new(options[:sandbox_root])
