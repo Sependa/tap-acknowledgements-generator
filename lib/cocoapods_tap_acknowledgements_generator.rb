@@ -1,5 +1,4 @@
 module CocoapodsTapAcknowledgementsGenerator
-	VERSION = "0.0.1"
 
 	require 'cocoapods_install_metadata/plist_generator'
 
