@@ -1,1 +1,1 @@
-require 'pod/command/generator'
+require 'cocoapods_tap_acknowledgements_generator'
