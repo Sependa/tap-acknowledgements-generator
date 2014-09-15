@@ -1,37 +1,37 @@
 
 module CocoapodsAcknowledgementsGenerator
-  require 'cocoapods_acknowledgements_generator/plist_generator'
-
-  Pod::Plugins.register(:post_install) do |options|
-    require 'xcodeproj/ext'
-    sandbox = Pod::Sandbox.new(options[:sandbox_root])
-    options[:user_targets].each do |user_target|
-      metadata = PlistGenerator.generate(user_target, sandbox)
-      plist_path = sandbox.root + "#{user_target[:cocoapods_target_label]}-metadata.plist"
-      Xcodeproj.write_plist(metadata, plist_path)
-
-
-      user_target[:user_project_path]
-      project = Xcodeproj::Project.open(user_target[:user_project_path])
-      cocoapods_group = project.main_group["CocoaPods"]
-      unless cocoapods_group
-        cocoapods_group = project.main_group.new_group("CocoaPods", sandbox.root)
+  Pod::HooksManager.register(:post_install) do |installer_context|
+    # implementation
+    root_path = installer_context.sandbox_root
+    installer_context.umbrella_targets.each do |user_target|
+      File.open(pod_acknowledgements_path, 'r+') do |f|
+        lines = f.readlines[2..-2]
       end
 
-      file_ref = cocoapods_group.files.find { |file| file.real_path == plist_path }
-      unless file_ref
-        file_ref = cocoapods_group.new_file(plist_path)
+      File.open(pod_acknowledgements_path, 'w+') do |f|
+        f.write(lines.join)
       end
 
-      target = project.objects_by_uuid[user_target[:uuid]]
-      unless target.resources_build_phase.files_references.include?(file_ref)
-        target.add_resources([file_ref])
+      target_path = root_path + "/Target Support Files/" + user_target.cocoapods_target_label + "/" + user_target.cocoapods_target_label + "-acknowledgements.markdown"
+      Markup::Runner.new(target_path, :output => aboutFilePath, :force => true).generate_html!
+
+      aboutFileContent = ''
+      aboutSpecsFileContent = ''
+
+      File.open(aboutFilePath, 'r+') do |f|
+        aboutFileContent = f.read
       end
 
-      project.save
+      File.open(aboutSpecsFilePath, 'r+') do |f|
+        aboutSpecsFileContent = f.read
+      end
+
+      File.delete(aboutFilePath)
+      File.delete(aboutSpecsFilePath)
+
+      File.open(aboutFilePath, 'w+') do |f|
+        f.write([aboutFileContent, "\n", aboutSpecsFileContent].join)
+      end
     end
   end
-
 end
-
-
