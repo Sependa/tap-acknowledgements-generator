@@ -1,1 +1,1 @@
-require 'pod/command/acknowledements'
+require 'pod/command/generator'
